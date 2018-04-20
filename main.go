@@ -9,7 +9,8 @@ import (
 	"github.com/urfave/cli"
 )
 
-func writeMessage(message string, dest string, prot string, info string, formatter syslog.Formatter) {
+func writeMessage(message string, dest string, prot string, info string,
+	formatter syslog.Formatter) {
 	sysLog, err := syslog.Dial(prot, dest,
 		syslog.LOG_WARNING|syslog.LOG_DAEMON, info)
 	if err != nil {
@@ -17,6 +18,7 @@ func writeMessage(message string, dest string, prot string, info string, formatt
 	}
 	sysLog.SetFormatter(formatter)
 	sysLog.Info(message)
+	fmt.Printf("sent message: %s\n in format: %s\n to: %s://%s\n", message, info, prot, dest)
 }
 
 func main() {
@@ -56,20 +58,23 @@ func main() {
 
 	app.Action = func(c *cli.Context) error {
 
-		if format == "rfc5424" {
+		switch {
+
+		case format == "rfc5424":
 			writeMessage(message, dest, prot, "RFC5424", syslog.RFC5424Formatter)
-			fmt.Println("sent message: " + message + "\n in format: " + format + "\n to: " + prot + "://" + dest)
-			return nil
-		} else if format == "rfc3164" {
+
+		case format == "rfc3164":
 			writeMessage(message, dest, prot, "RFC3164", syslog.RFC3164Formatter)
-			fmt.Println("sent message: " + message + "\n in format: " + format + "\n to: " + prot + "://" + dest)
-			return nil
-		} else if format == "comp" {
+
+		case format == "comp":
 			writeMessage(message, dest, prot, "COMPATIBILITY", syslog.DefaultFormatter)
-			fmt.Println("sent message: " + message + "\n in format: " + format + "\n to: " + prot + "://" + dest)
-			return nil
+
+		default:
+			return cli.NewExitError("no valid format", 1)
+
 		}
-		return cli.NewExitError("no valid format", 1)
+
+		return nil
 	}
 
 	err := app.Run(os.Args)
