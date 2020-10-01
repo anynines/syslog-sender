@@ -1,0 +1,4 @@
+github.com/RackSec/srslog v0.0.0-20180118150909-f6152a1bd055 h1:bp29CVrizXa1srevaI08xheqN58wZRHiChDJQlrxt8E=
+github.com/RackSec/srslog v0.0.0-20180118150909-f6152a1bd055/go.mod h1:cDLGBht23g0XQdLjzn6xOGXDkLK182YfINAaZEQLCHQ=
+github.com/urfave/cli v1.20.0 h1:fDqGv3UG/4jbVl/QkFwEdddtEDjh/5Ov6X+0B/3bPaw=
+github.com/urfave/cli v1.20.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=
