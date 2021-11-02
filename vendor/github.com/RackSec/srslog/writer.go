@@ -17,6 +17,9 @@ type Writer struct {
 	framer    Framer
 	formatter Formatter
 
+	//non-nil if custom dialer set, used in getDialer
+	customDial DialFunc
+
 	mu   sync.RWMutex // guards conn
 	conn serverConn
 }
@@ -69,6 +72,11 @@ func (w *Writer) SetFormatter(f Formatter) {
 // SetFramer changes the framer function for subsequent messages.
 func (w *Writer) SetFramer(f Framer) {
 	w.framer = f
+}
+
+// SetHostname changes the hostname for syslog messages if needed.
+func (w *Writer) SetHostname(hostname string) {
+	w.hostname = hostname
 }
 
 // Write sends a log message to the syslog daemon using the default priority

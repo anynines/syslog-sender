@@ -1,8 +1,14 @@
 module github.com/anynines/syslog-sender
 
-go 1.14
+go 1.17
 
 require (
-	github.com/RackSec/srslog v0.0.0-20180118150909-f6152a1bd055
-	github.com/urfave/cli v1.20.0
+	github.com/RackSec/srslog v0.0.0-20180709174129-a4725f04ec91
+	github.com/urfave/cli v1.22.5
+)
+
+require (
+	github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d // indirect
+	github.com/russross/blackfriday/v2 v2.0.1 // indirect
+	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 )
