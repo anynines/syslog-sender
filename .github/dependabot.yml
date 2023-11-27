@@ -1,0 +1,19 @@
+version: 2
+updates:
+  - package-ecosystem: gomod
+    directory: "/"
+    # Disable version updates, only security updates
+    open-pull-requests-limit: 0
+    schedule:
+      interval: weekly
+      time: "04:00"
+      day: "monday"
+      timezone: "Europe/Berlin"
+    labels:
+      - "unit-test"
+      - "cve"
+      - "dependabot"
+    groups:
+      all_dependencies:
+        patterns:
+          - "*"
